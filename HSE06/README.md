@@ -1,12 +1,12 @@
-# Si ChIMES training inputs: PW91
+# Si ChIMES training inputs: HSE06
 
-Inputs used to fit the ChIMES silicon model trained to **PW91** DFT data.
+Inputs used to fit the ChIMES silicon model trained to **HSE06** DFT data.
 
 ## Files
 
 | File | What it is |
 |---|---|
-| `fm_setup.in` | ChIMES-LSQ fit setup: 900 training frames, Si only, Chebyshev orders 2B/3B/4B = 20/12/3, Morse transform (λ = 2.33 Å), Tersoff cutoff (0.75), r = 1.55–7.0 Å (2B), 6.0 Å (3B), 5.0 Å (4B). Fits forces, energies and all stress components. `SPLITFI` = true. |
+| `fm_setup.in` | ChIMES-LSQ fit setup: 503 training frames, Si only, Chebyshev orders 2B/3B/4B = 20/12/3, Morse transform (λ = 2.33 Å), Tersoff cutoff (0.75), r = 1.55–7.0 Å (2B), 6.0 Å (3B), 5.0 Å (4B). Fits forces, energies and all stress components. `SPLITFI` = false. |
 | `weights.txt` | Per-row weights for the least-squares design matrix (one value per force, energy and stress row), produced by `generate_weights.py`. Pass to the ChIMES `lsq2.py` solver. |
 | `generate_weights.py` | Script that builds `weights.txt` (originally named `Updated_Abs.py`). |
 | `config.py` | Config for the ChIMES PES scan utility (`pes_generator.py`) used to plot the fitted 2- and 3-body curves. Keep the name `config.py`; the utility imports it by that name. |
@@ -21,7 +21,7 @@ Needs, in the working directory:
 Steps:
 
 1. Reads every frame in the `.xyzf` files in `trajlist.dat` and computes each frame's mean |force|.
-2. Splits the frames into groups (`group_sizes`; one group = one block of related configurations, in trajlist order; must sum to 900).
+2. Splits the frames into groups (`group_sizes`; one group = one block of related configurations, in trajlist order; must sum to 503).
 3. **Force weight** per group = median(|F| over all frames) / mean(|F| in group), capped at 5. Groups with small forces get more weight, so every group contributes about equally.
 4. **Energy** and **stress** weights are set by hand per group (`energies`, `stresses` arrays).
 5. Walks `b-labeled.txt` row by row and writes the matching weight to `weights.txt`.
