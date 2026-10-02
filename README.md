@@ -18,6 +18,9 @@ Needs, in the working directory:
 - `trajlist.dat`: the trajectory list referenced by `fm_setup.in` (first line = number of files, then one `.xyzf` path per line).
 - `b-labeled.txt`: the labeled target vector written by `chimes_lsq` (row labels `Si` = force, `+1` = energy, `s_*` = stress).
 
+Calculator commit:commit 3bc4d3c613bf0b01772bc13d532b64de071d3399
+LSQ commit: 7567867fa85ae22d29c7f84f495149a11003df6b
+
 Steps:
 
 1. Reads every frame in the `.xyzf` files in `trajlist.dat` and computes each frame's mean |force|.
